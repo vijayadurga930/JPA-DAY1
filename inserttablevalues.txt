@@ -1,0 +1,41 @@
+String url="jdbc:oracle:thin:@localhost:1521:XE";
+		Scanner scan=new Scanner(System.in);
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+	
+		Connection con=	DriverManager.getConnection(url,"Vijaya","vijaya");
+		Employees emp=new Employees();
+		
+		System.out.println("enter id:");
+		emp.setId(Integer.parseInt(scan.nextLine()));
+		System.out.println("enter name:");
+		emp.setName(scan.nextLine());
+		System.out.println("enter gender:");
+		emp.setGender(scan.nextLine());
+		System.out.println("enter age:");
+		emp.setAge(Integer.parseInt(scan.nextLine()));
+		System.out.println("enter salary:");
+		emp.setSalary(Double.parseDouble(scan.nextLine()));
+		PreparedStatement stat= con.prepareStatement("insert into employees values(?,?,?,?,?)");
+	
+		stat.setInt(1,emp.getId());
+		stat.setString(2,emp.getName());
+		stat.setString(3,emp.getGender());
+		stat.setInt(4, emp.getAge());
+		stat.setDouble(5,emp.getSalary());
+		
+		int result=stat.executeUpdate();
+		
+		
+		System.out.println(result+"row(s) inserted into the database");
+	    } catch (ClassNotFoundException e) {
+			
+			e.printStackTrace();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+
+	}

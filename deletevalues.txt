@@ -1,0 +1,15 @@
+public static void main(String[] args) {
+		Employees emp= new Employees(1009, "Surya", "Male",29,760);
+		
+		EntityManagerFactory factory= Persistence.createEntityManagerFactory("JPA-PU");
+		EntityManager em=factory.createEntityManager();
+	Scanner scan=new Scanner(System.in);
+	System.out.println("enter employee Id:");
+	int empId=scan.nextInt();
+	em.getTransaction().begin();
+	Employees e=em.find(Employees.class, empId);
+	em.remove(e);
+	em.getTransaction().commit();
+	System.out.println("Employee with Id "+empId+"remove from database");
+		
+}

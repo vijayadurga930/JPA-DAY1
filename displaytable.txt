@@ -1,0 +1,17 @@
+	
+		Statement stat=con.createStatement();
+		ResultSet rs=stat.executeQuery("select * from employees");
+		List<Employees> employees=new ArrayList<>();
+		while(rs.next()) {
+			Employees emp=new Employees();
+			emp.setId(rs.getInt(1));
+			emp.setName(rs.getString(2));
+			emp.setGender(rs.getString(3));
+			emp.setAge(rs.getInt("emp_age"));
+			emp.setSalary(rs.getDouble(5));
+			employees.add(emp);
+		}
+		for(Employees employee:employees) {
+			System.out.println(employee);
+		}
+		
